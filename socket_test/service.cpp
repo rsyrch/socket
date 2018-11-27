@@ -87,8 +87,21 @@ int mian(int argc, char* argv[]) {
 			return -1;
 		}
 
-		if(buf[0])
+		if (buf[0] == '0') {
+			break;
+		}
+
+		cout << "发送的数据: " << endl;
+		cin >> sendBuf;
+
+		// 发送数据
+		send(client_socket, sendBuf, strlen(sendBuf), 0);
 	}
+
+	// 退出
+	closesocket(server_socket);	//关闭服务端套接字
+	closesocket(client_socket);	//关闭客户端套接字
+	WSACleanup();			//释放套接字资源;
 		
 	return 0;
 }
