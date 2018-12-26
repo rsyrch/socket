@@ -25,4 +25,9 @@ int client() {
 
 	// 创建套接字
 	server_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	if (INVALID_SOCKET == server_socket) {
+		cout << "创建套接字失败" << endl;
+		WSACleanup();
+		return -1;
+	}
 } 
