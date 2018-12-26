@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <WINSOCK2.H>
+#pragma comment(lib, "Ws2_32.lib")
 
 using namespace std;
 
@@ -9,9 +10,9 @@ using namespace std;
 #define PORT 5150
 #define MSGSIZE 1024
 
-#pragma(lib, "ws2_32.lib")
 
-int mian(int argc, char* argv[]) {
+
+int main(int argc, char* argv[]) {
 	const int BUF_SIZE = 64;
 	WSADATA		wsd;	// WAADATA变量
 	SOCKET		server_socket;	// 服务器套接字
@@ -24,7 +25,7 @@ int mian(int argc, char* argv[]) {
 	// 初始化套结字动态库
 	if (WSAStartup(MAKEWORD(2, 2), &wsd) != 0) {
 		cout << " 初始化套接字动态库失败 " << endl;
-		return 1;
+		return -1;
 	}
 
 	// 创建套接字
@@ -91,7 +92,7 @@ int mian(int argc, char* argv[]) {
 			break;
 		}
 
-		cout << "发送的数据: " << endl;
+		cout << "客户端发送的数据: " << buf << endl;
 		cin >> sendBuf;
 
 		// 发送数据
